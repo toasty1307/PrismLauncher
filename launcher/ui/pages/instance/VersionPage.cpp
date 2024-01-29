@@ -295,13 +295,6 @@ void VersionPage::on_actionRemove_triggered()
     m_container->refreshContainer();
 }
 
-void VersionPage::on_actionInstall_mods_triggered()
-{
-    if (m_container) {
-        m_container->selectPage("mods");
-    }
-}
-
 void VersionPage::on_actionAdd_to_Minecraft_jar_triggered()
 {
     auto list = GuiUtil::BrowseForFiles("jarmod", tr("Select jar mods"), tr("Minecraft.jar mods (*.zip *.jar)"),
@@ -411,7 +404,7 @@ void VersionPage::on_actionDownload_All_triggered()
     if (!APPLICATION->accounts()->anyAccountIsValid()) {
         CustomMessageBox::selectable(this, tr("Error"),
                                      tr("Cannot download Minecraft or update instances unless you have at least "
-                                        "one account added.\nPlease add your Microsoft or Mojang account."),
+                                        "one account added.\nPlease add a Microsoft account."),
                                      QMessageBox::Warning)
             ->show();
         return;
@@ -454,12 +447,12 @@ void VersionPage::on_actionAdd_Empty_triggered()
 
 void VersionPage::on_actionLibrariesFolder_triggered()
 {
-    DesktopServices::openDirectory(m_inst->getLocalLibraryPath(), true);
+    DesktopServices::openPath(m_inst->getLocalLibraryPath(), true);
 }
 
 void VersionPage::on_actionMinecraftFolder_triggered()
 {
-    DesktopServices::openDirectory(m_inst->gameRoot(), true);
+    DesktopServices::openPath(m_inst->gameRoot(), true);
 }
 
 void VersionPage::versionCurrent(const QModelIndex& current, [[maybe_unused]] const QModelIndex& previous)
